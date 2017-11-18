@@ -11,5 +11,5 @@ def flowBalRule(model, d, M)
     Rule or expression for flow balance constraints
     
     
-"""
-    return (sum(M[i,a]*f[a,k] for a in model.links )-d[i,k]== 0.0 for i in model.nodes for k in model.od)
+""" 
+    return (sum(M[i,a]*f[a,k] for a in model.links )-d[:,k]== 0.0 for i in model.nodes for k in model.od)
