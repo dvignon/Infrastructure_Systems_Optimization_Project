@@ -12,4 +12,6 @@ def flowBalRule(model, d, M)
     
     
 """
-    return (sum(M[i,a]*f[a,k] for a in model.links )-d[i,k]== 0.0 for i in model.nodes for k in model.od)
+    # return (sum(M[i,a]*f[a,k] for a in model.links )-d[i,k]== 0.0 for i in model.nodes for k in model.od)
+    L=M.shape(1)
+    return (M.dot(f[:,k])-d[:,k]== np.zero(L) for k in model.od)
