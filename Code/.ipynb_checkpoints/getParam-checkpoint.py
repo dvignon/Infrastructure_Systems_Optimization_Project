@@ -16,9 +16,10 @@ def getParam(filename):
         beta: list of link "B" (constant in BPR function) 
     A: list of tuples A[k]=(i,j) where i (j) is the head (tail) of link k
     M: Sparse node incidence matrix M
+    N: number of nodes
+    L = number of links
     """
     #Reading the parameters from the file
-   
     param = pd.read_csv(filename, sep = '\t', comment = '<',usecols=['Capacity ', 'Free Flow Time ', 'B', 'Power'])
     
     #Renaming the columns of the file according to our conventions
@@ -40,6 +41,6 @@ def getParam(filename):
 
     M = sparse.csr_matrix(M)
 
-    return param, A, M
+    return param, A, M, N, L 
     
     
