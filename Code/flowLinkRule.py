@@ -9,3 +9,4 @@ def flowLink_Rule(model)
     Rule or expression for link flow constraints
     
 """
+    return (f[a]-sum(f[a,k] for k in model.od )== 0.0 for a in model.links)
