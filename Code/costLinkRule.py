@@ -1,4 +1,4 @@
-def flowLinkRule(model,a):
+def costLinkRule(model,param,a):
     """
         This function defines the link flow definitional constraints for the TAP.
 
@@ -9,4 +9,4 @@ def flowLinkRule(model,a):
         Rule or expression for link flow constraints
 
     """
-    return (model.f[a]-sum(model.fk[a,k] for k in model.od )== 0.0)
+    return (model.c[a]-(param['t_0'][a]*model.f[a]*(1+ param['beta'][a]/(param['alpha'][a]+1)*(model.f[a]/param['C'][a])**param['alpha'][a]))== 0.0)
