@@ -26,8 +26,11 @@ def getParam(filename):
     param.columns = ['C','t_0','beta','alpha']
     
     #Reading link informations for the file and converting to an array of tuples
-    A = pd.read_csv(filename, sep = '\t', comment = '<',usecols=['Tail', 'Head'])
-    A = list(zip(A['Tail'], A['Head']))
+    #A = pd.read_csv(filename, sep = '\t', comment = '<',usecols=['Tail', 'Head'])
+    #A = list(zip(A['Tail'], A['Head']))
+    
+    A = pd.read_csv(filename, sep = '\t', comment = '<',usecols=['Init node ', 'Term node '])
+    A = list(zip(A['Init node '], A['Term node ']))
     
     #Getting number of nodes(N) and links(L)
     N = max(max(A,key=lambda x:x[0])[0],max(A,key=lambda x:x[1])[1])
@@ -42,14 +45,14 @@ def getParam(filename):
         M = sparse.csr_matrix(M)"""
     
     #Build dictionary
-    M = {}
-    for i in range(N):
+    M = {} #Dictionary of nodes with their associated links
+    for i in range(N):  #Assigns node as dictionary keys
         M[i] = []
     
     #print(M.keys())
     for a in range(len(A)):
-        M[A[a][0]-1].append((a,1)) 
-        M[A[a][1]-1].append((a,-1))
+        M[A[a][0]-1].append((a,1)) #Update list for origin node
+        M[A[a][1]-1].append((a,-1)) #Update list for destination node
 
     return param, A, M, N, L 
     
