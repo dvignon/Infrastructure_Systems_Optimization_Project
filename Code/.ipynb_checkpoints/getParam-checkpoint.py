@@ -26,8 +26,11 @@ def getParam(filename):
     param.columns = ['C','t_0','beta','alpha']
     
     #Reading link informations for the file and converting to an array of tuples
-    A = pd.read_csv(filename, sep = '\t', comment = '<',usecols=['Tail', 'Head'])
-    A = list(zip(A['Tail'], A['Head']))
+    #A = pd.read_csv(filename, sep = '\t', comment = '<',usecols=['Tail', 'Head'])
+    #A = list(zip(A['Tail'], A['Head']))
+    
+    A = pd.read_csv(filename, sep = '\t', comment = '<',usecols=['Init node ', 'Term node '])
+    A = list(zip(A['Init node '], A['Term node ']))
     
     #Getting number of nodes(N) and links(L)
     N = max(max(A,key=lambda x:x[0])[0],max(A,key=lambda x:x[1])[1])
