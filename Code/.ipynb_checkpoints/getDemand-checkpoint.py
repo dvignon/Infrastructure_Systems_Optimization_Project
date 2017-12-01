@@ -22,7 +22,9 @@ def getDemand(filename, L):
             D = np.zeros([n_OD,n_OD])
             OD_pair = []
         #Check number of Origin
-        elif "Origin" in line: 
+        elif "Origin" in line:
+            #print(line.replace(" ","\t").split("\t"))
+            #index_i=int(line.replace(" ","\t").split("\t")[1])
             index_i=int(line.split("\t")[1])
         #Fills row for Origin index_i
         else:

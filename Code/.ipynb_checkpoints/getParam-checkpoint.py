@@ -26,6 +26,9 @@ def getParam(filename):
     param.columns = ['C','t_0','beta','alpha']
     
     #Reading link informations for the file and converting to an array of tuples
+    #A = pd.read_csv(filename, sep = '\t', comment = '<',usecols=['Tail', 'Head'])
+    #A = list(zip(A['Tail'], A['Head']))
+    
     A = pd.read_csv(filename, sep = '\t', comment = '<',usecols=['Init node ', 'Term node '])
     A = list(zip(A['Init node '], A['Term node ']))
     
@@ -34,12 +37,22 @@ def getParam(filename):
     L = len(param)
     
     #Build sparse incidence matrix
-    M= np.zeros((N,L))
-    for a,b in zip(A,range(len(A))):
+    """ M= np.zeros((N,L))
+        for a,b in zip(A,range(len(A))):
         M[a[0]-1,b] = 1;
         M[a[1]-1,b] = -1;
 
-    M = sparse.csr_matrix(M)
+        M = sparse.csr_matrix(M)"""
+    
+    #Build dictionary
+    M = {} #Dictionary of nodes with their associated links
+    for i in range(N):  #Assigns node as dictionary keys
+        M[i] = []
+    
+    #print(M.keys())
+    for a in range(len(A)):
+        M[A[a][0]-1].append((a,1)) #Update list for origin node
+        M[A[a][1]-1].append((a,-1)) #Update list for destination node
 
     return param, A, M, N, L 
     
