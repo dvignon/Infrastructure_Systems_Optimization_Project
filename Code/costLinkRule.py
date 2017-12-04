@@ -9,5 +9,5 @@ def costLinkRule(model,param,a):
         Rule or expression for link flow constraints
 
     """
-    return (model.c[a]-(param['t_0'][a]*model.f[a]*(1+ param['beta'][a]/(param['alpha'][a]+1)*(model.f[a]/param['C'][a])**param['alpha'][a]))== 0.0)
-    #return (model.c[a]-(param['t_0'][a]*model.f[a]*(1+ param['beta'][a]*(model.f[a]/param['C'][a])**param['alpha'][a]))== 0.0)
+    #return (model.c[a]-(param['t_0'][a]*model.f[a]*(1+ param['beta'][a]/(param['alpha'][a]+1)*(model.f[a]/param['C'][a])**param['alpha'][a]))== 0.0)
+    return (model.c[a]-(param['t_0'][a]*model.f[a]*(1+ param['beta'][a]*(model.f[a]/param['C'][a])**param['alpha'][a]))== 0.0)
